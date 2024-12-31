@@ -23,7 +23,7 @@ export default function Index() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
   const [pickedEmoji, setPickedEmoji] = useState<ImageSource | undefined>(undefined)
   const [status, requestPermission] = MediaLibrary.usePermissions()
-  const imageRef = useRef<View>(null)
+  const imageRef = useRef(null)
 
   if (status === null) {
     requestPermission()
@@ -73,6 +73,7 @@ export default function Index() {
       }
     } else {
       try {
+        if (!imageRef.current) return
         const dataUrl = await domtoimage.toJpeg(imageRef.current, {
           quality: 0.95,
           width: 320,
@@ -111,14 +112,14 @@ export default function Index() {
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
             <IconButton
-              icon="refresh"
-              label="Reset"
+              icon='refresh'
+              label='Reset'
               onPress={onReset}
             />
             <CircleButton onPress={onAddSticker} />
             <IconButton
-              icon="save-alt"
-              label="Save"
+              icon='save-alt'
+              label='Save'
               onPress={onSaveImageAsync}
             />
           </View>
@@ -126,12 +127,12 @@ export default function Index() {
       ) : (
         <View style={styles.footerContainer}>
           <Button
-            theme="primary"
-            label="Choose a photo"
+            theme='primary'
+            label='Choose a photo'
             onPress={pickImageAsync}
           />
           <Button
-            label="Use this photo"
+            label='Use this photo'
             onPress={() => setShowAppOptions(true)}
           />
         </View>
