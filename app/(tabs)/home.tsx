@@ -8,7 +8,7 @@ import { captureRef } from 'react-native-view-shot'
 import domtoimage from 'dom-to-image'
 
 import ImageViewer from '@/components/ImageViewer'
-import Button from '@/components/Button'
+import Button from '@/components/CustomButton'
 import IconButton from '@/components/IconButton'
 import CircleButton from '@/components/CircleButton'
 import EmojiPicker from '@/components/EmojiPicker'
@@ -127,7 +127,6 @@ export default function Index() {
       ) : (
         <View style={styles.footerContainer}>
           <Button
-            theme='primary'
             label='Choose a photo'
             onPress={pickImageAsync}
           />

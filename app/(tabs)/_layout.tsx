@@ -1,25 +1,20 @@
 import { Tabs } from 'expo-router'
-
 import Ionicons from '@expo/vector-icons/Ionicons'
 
-export default function TabLayout() {
+const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#ffd33d',
-        headerStyle: {
-          backgroundColor: '#25292e',
-        },
-        headerShadowVisible: false,
-        headerTintColor: '#fff',
+        tabBarActiveTintColor: '#ef4444',
         tabBarStyle: {
           backgroundColor: '#25292e',
           height: 52,
         },
       }}>
       <Tabs.Screen
-        name='index'
+        name='home'
         options={{
+          headerShown: false,
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
@@ -46,3 +41,5 @@ export default function TabLayout() {
     </Tabs>
   )
 }
+
+export default TabsLayout
