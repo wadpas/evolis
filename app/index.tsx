@@ -1,28 +1,30 @@
 import { View, Text, Image, SafeAreaView, Button } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { router, Href, Redirect } from 'expo-router'
+import { useGlobalContext } from '@/context/GlobalProvider'
 import CustomButton from '@/components/CustomButton'
-import { router, Href } from 'expo-router'
 
 const logo = require('../assets/images/logo.svg')
 const main = require('../assets/images/main.png')
 
 const App = () => {
+  const { isLoggedIn, isLoading, user } = useGlobalContext()
+
+  if (!isLoading && isLoggedIn) {
+    return <Redirect href='/home' />
+  }
+
   return (
-    <SafeAreaView className='h-full bg-black'>
-      <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View className='items-center flex-1 px-6 justify-evenly'>
-          <Image source={logo} />
-          <View className='items-center'>
-            <Image source={main} />
-            <Text className='text-3xl text-center text-white'>Open up the future now!</Text>
-          </View>
-          <CustomButton
-            label='Sign in'
-            onPress={() => router.push('/(auth)/sing-in' as Href)}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View className='items-center h-full p-6 bg-black justify-evenly'>
+      <Image source={logo} />
+      <View className='items-center'>
+        <Image source={main} />
+        <Text className='text-3xl text-center text-white'>Open up the future now!</Text>
+      </View>
+      <CustomButton
+        title='Get Started'
+        handlePress={() => router.push('/(auth)/sign-in' as Href)}
+      />
+    </View>
   )
 }
 
